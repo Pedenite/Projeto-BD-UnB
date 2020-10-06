@@ -14,7 +14,7 @@ class AlunosControllers {
     function getAlunos(){
         $retorno = $this->conn->query('SELECT * FROM aluno');
 
-        if($retorno && $retorno->num_rows > 0){
+        if($retorno){
 
             $arratAluno = array();
 
@@ -26,18 +26,6 @@ class AlunosControllers {
 
             return json_encode(array('status'=>'sucesso','dados'=>$arratAluno));
 
-        }else{
-
-            if($retorno && $retorno->num_rows == 0){
-
-                return json_encode(array('status'=>'sucesso','dados'=>array()));
-
-            }
-
-            return json_encode(array('status'=>'erro','dados'=>'Nenhum aluno retornado!'));
-
         }
-
-
     }
 }

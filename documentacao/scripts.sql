@@ -45,21 +45,11 @@ foreign key (professor_matricula) references professor(matricula),
 foreign key (turma_id) references turma(id)
 );
 
-CREATE TABLE aluno_disponibilidade_recurso (
-aluno_matricula varchar(9) NOT NULL,
-disponibilidade_id int(11) NOT NULL,
-recurso_id int(11) NOT NULL,
-PRIMARY KEY (aluno_matricula,disponibilidade_id,recurso_id),
-FOREIGN KEY (disponibilidade_id) REFERENCES disponibilidade(id),
-FOREIGN KEY (aluno_matricula) REFERENCES aluno(matricula),
-FOREIGN KEY (recurso_id) REFERENCES recurso(id)
-);
-
-CREATE TABLE disponibilidade (
-id int(11) NOT NULL AUTO_INCREMENT,
-disponibilidade varchar(45) NOT NULL,
-PRIMARY KEY (id)
-);
+-- CREATE TABLE disponibilidade (
+-- id int(11) NOT NULL AUTO_INCREMENT,
+-- disponibilidade varchar(45) NOT NULL,
+-- PRIMARY KEY (id)
+-- );
 
 CREATE TABLE plataforma (
   id int(11) NOT NULL AUTO_INCREMENT,
@@ -78,6 +68,15 @@ CREATE TABLE recurso (
   plataforma_id int(11) NOT NULL,
   PRIMARY KEY (recurso, plataforma_id),
   foreign key (plataforma_id) references plataforma(id)
+);
+
+CREATE TABLE aluno_dispositivo (
+aluno_matricula varchar(9) NOT NULL,
+dispositivo_id int(11) NOT NULL,
+disponibilidade varchar(10) NOT NULL CHECK (disponibilidade IN ('sempre', 'as vezes', 'nunca', 'pela manha', 'pela tarde', 'pela noite')),
+PRIMARY KEY (aluno_matricula,dispositivo_id),
+FOREIGN KEY (aluno_matricula) REFERENCES aluno(matricula),
+FOREIGN KEY (dispositivo_id) REFERENCES dispositivo(id)
 );
 
 create table aula(

@@ -3,31 +3,32 @@
 Ferramenta para auxiliar o professor no modelo de aulas à distância.
 
 ## Banco
+Foi usado o MySQL que está rodando em um servidor web.
 *hostname:* `opessoa.com.br:3306`
 
 ## Aplicação
+Foi usada a linguagem php para o desenvolvimento de uma API que servirá como o CRUD de nosso projeto
 *host:* `api2.opessoa.com.br`
 
 ## Uso
-### Onde acessar
-#### API Web
+### API Web
 Acessar no browser:
 `https://api2.opessoa.com.br/<Modulo>/<Classe>/<funcao>/<parm1>/<parm2>/<parm3>...`
 
-exemplo: `https://api2.opessoa.com.br/ProjetoBD/AlunosControllers/getAlunos`
+exemplo: https://api2.opessoa.com.br/ProjetoBD/AlunosControllers/getAlunos
 
-#### Ambiente de Teste Local (Docker)
+### Ambiente de Teste Local (Docker)
 Acessar no browser (container rodando):
 `localhost:8080/?url=ProjetoBD/<nome do controller>/<funcao>/<param1>/<param2>/<param3>...`
 
-exemplo: `http://localhost:8080/?url=ProjetoBD/AlunosControllers/getAlunos`
+exemplo: http://localhost:8080/?url=ProjetoBD/AlunosControllers/getAlunos
 
 **Obs: Seria necessária a conexão com o banco, que não foi disponibilizado o arquivo no git. Caso não tenha acesso ao servidor ftp para obter o arquivo da conexão, convém criar o banco com o script SQL disponível na [documentação](documentacao/) e adicionar o seguinte arquivo na pasta [controllers](controllers/):**
 
 **Config.php**:
 ```php
 <?php
-define('HOST', 'localhost:3306'); // ou o host alternativo usado e porta
+define('HOST', 'localhost:3306'); // ou o host e porta alternativos usados 
 define('USUARIO', 'root'); // ou o usuário alternativo usado
 define('SENHA', ''); // ou a senha definida
 define('DB', 'opesso08_ProjetoDB'); // ou o nome alternativo dado ao banco

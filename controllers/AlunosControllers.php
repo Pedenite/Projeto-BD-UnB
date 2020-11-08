@@ -16,24 +16,24 @@ class AlunosControllers {
 
         if($retorno && $retorno->num_rows > 0){
 
-            $arratAluno = array();
+            $arrayAluno = array();
 
             for($i = 0; $i < $retorno->num_rows; $i++){
 
-                $arratAluno[] = $retorno->fetch_object();
+                $arrayAluno[] = $retorno->fetch_object();
 
             }
-
-            return json_encode(array('status'=>'sucesso','dados'=>$arratAluno));
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>$arrayAluno));
 
         }else{
 
             if($retorno && $retorno->num_rows == 0){
-
+                $this->conn->close();
                 return json_encode(array('status'=>'sucesso','dados'=>array()));
 
             }
-
+            $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Nenhum aluno retornado!'));
 
         }
@@ -42,25 +42,31 @@ class AlunosControllers {
 
     function insertAluno($matricula = '', $nome = '', $email = ''){ 
         if($matricula == ''|| $nome == ''|| $email == ''){
+            $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
         }
         $retorno = $this->conn->query("INSERT INTO `aluno` (`matricula`,`nome`,`email`) VALUES ('".$this->conn->real_escape_string($matricula)."','".$this->conn->real_escape_string($nome)."','".$this->conn->real_escape_string($email)."');");
         if($retorno){
+            $this->conn->close();
             return json_encode(array('status'=>'sucesso','dados'=>'Aluno '.$nome.' inserido na tabela.'));
         }else{
-            return json_encode(array('status'=>'erro','dados'=>'Erro ao inserir aluno na tabela!'));
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao inserir o aluno na tabela!'));
         }
     }
 
     function deleteAluno($matricula = ''){ 
         if($matricula == ''){
+            $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
         }
         $retorno = $this->conn->query("DELETE FROM `aluno` WHERE `matricula` = '".$this->conn->real_escape_string($matricula)."';");
-        if($retorno){
+        if($retorno && $this->conn->affected_rows > 0){
+            $this->conn->close();
             return json_encode(array('status'=>'sucesso','dados'=>'Aluno '.$matricula.' deletado da tabela.'));
         }else{
-            return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar aluno da tabela!'));
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar o aluno da tabela!'));
         }
     }
 }

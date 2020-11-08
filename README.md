@@ -22,13 +22,13 @@ Acessar no browser (container rodando):
 
 exemplo: `http://localhost:8080/?url=ProjetoBD/AlunosControllers/getAlunos`
 
-*Obs: Seria necessária a conexão com o banco, que não foi disponibilizado o arquivo no git. Caso não tenha acesso ao servidor ftp para obter o arquivo da conexão, convém criar o banco com o script SQL disponível na [documentação](documentacao/) e adicionar o seguinte arquivo na pasta [controllers](controllers/):*
+**Obs: Seria necessária a conexão com o banco, que não foi disponibilizado o arquivo no git. Caso não tenha acesso ao servidor ftp para obter o arquivo da conexão, convém criar o banco com o script SQL disponível na [documentação](documentacao/) e adicionar o seguinte arquivo na pasta [controllers](controllers/):**
 
-*Config.php*:
+**Config.php**:
 ```php
 <?php
-define('HOST', 'localhost:3306'); // ou o host usado
-define('USUARIO', 'root'); // ou o usuário usado
+define('HOST', 'localhost:3306'); // ou o host alternativo usado e porta
+define('USUARIO', 'root'); // ou o usuário alternativo usado
 define('SENHA', ''); // ou a senha definida
 define('DB', 'opesso08_ProjetoDB'); // ou o nome alternativo dado ao banco
 ```

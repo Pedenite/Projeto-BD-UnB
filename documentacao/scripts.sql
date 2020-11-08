@@ -98,7 +98,6 @@ CREATE TABLE tipo_participacao (
   PRIMARY KEY (id)
 );
 
-
 create table participacao (
 id int(11) not null auto_increment,
 tempo int(11) null, -- em minutos!

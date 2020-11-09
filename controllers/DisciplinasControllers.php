@@ -34,7 +34,7 @@ class DisciplinasControllers {
 
             }
             $this->conn->close();
-            return json_encode(array('status'=>'erro','dados'=>'Nenhum Disciplina retornado!'));
+            return json_encode(array('status'=>'erro','dados'=>'Nenhuma disciplina retornada!'));
 
         }
 
@@ -48,7 +48,7 @@ class DisciplinasControllers {
         $retorno = $this->conn->query("INSERT INTO disciplina (codigo, nome) VALUES ('".$this->conn->real_escape_string($codigo)."', '".$this->conn->real_escape_string($nome)."')");
         if($retorno){
             $this->conn->close();
-            return json_encode(array('status'=>'sucesso','dados'=>'Disciplina '.$codigo.' inserido na tabela.'));
+            return json_encode(array('status'=>'sucesso','dados'=>'Disciplina '.$codigo.' inserida na tabela.'));
         }else{
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Erro ao inserir o Disciplina na tabela!'));
@@ -63,10 +63,10 @@ class DisciplinasControllers {
         $retorno = $this->conn->query("DELETE FROM disciplina WHERE codigo = '".$this->conn->real_escape_string($codigo)."'");
         if($retorno && $this->conn->affected_rows > 0){
             $this->conn->close();
-            return json_encode(array('status'=>'sucesso','dados'=>'Disciplina '.$codigo.' deletado da tabela.'));
+            return json_encode(array('status'=>'sucesso','dados'=>'Disciplina '.$codigo.' deletada da tabela.'));
         }else{
             $this->conn->close();
-            return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar o Disciplina da tabela!'));
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar a disciplina da tabela!'));
         }
     }
 }

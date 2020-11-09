@@ -84,9 +84,8 @@ create table aula(
 	turma_disciplina_codigo varchar(8) not null,
 	plataforma_id int(11),
 	primary key(numero, turma_id, turma_disciplina_codigo),
-	foreign key (turma_id) references turma(id),
-	foreign key (plataforma_id) references plataforma(id),
-	foreign key (turma_disciplina_codigo) references disciplina(codigo)
+	foreign key (turma_id, turma_disciplina_codigo) references turma(id, disciplina_codigo),
+	foreign key (plataforma_id) references plataforma(id)
 );
 
 create table tipo_participacao (
@@ -108,7 +107,5 @@ create table participacao (
 	primary key (id),
 	foreign key (aluno_matricula) references aluno(matricula),
 	foreign key (tipo_participacao_id) references tipo_participacao(id),
-	foreign key (aula_numero) references aula(numero),
-	foreign key (aula_turma_id) references turma(id),
-	foreign key (aula_turma_disciplina_codigo) references disciplina(codigo)
+	foreign key (aula_numero, aula_turma_id, aula_turma_disciplina_codigo) references aula(numero, turma_id, turma_disciplina_codigo)
 );

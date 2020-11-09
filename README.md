@@ -39,4 +39,4 @@ define('DB', 'opesso08_ProjetoDB'); // ou o nome alternativo dado ao banco
 #### Dica:
 Para rodar o container, foi disponibilizado um arquivo execute.sh para já criar a imagem e rodar. Deve mudar o valor da variável LOCAL_PATH e opcionalmente de APP_PORT se for mudar a porta.
 
-Obs: é necessário ter o [docker](https://docs.docker.com/get-docker/) instalado! 
+Obs: é necessário ter o [docker](https://docs.docker.com/get-docker/) instalado para fazer esse teste local! 

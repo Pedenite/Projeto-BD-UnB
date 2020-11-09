@@ -4,10 +4,12 @@ Ferramenta para auxiliar o professor no modelo de aulas à distância.
 
 ## Banco
 Foi usado o MySQL que está rodando em um servidor web.
+
 *hostname:* `opessoa.com.br:3306`
 
 ## Aplicação
-Foi usada a linguagem php para o desenvolvimento de uma API que servirá como o CRUD de nosso projeto
+Foi usada a linguagem php para o desenvolvimento de uma API que servirá como o CRUD de nosso projeto.
+
 *host:* `api2.opessoa.com.br`
 
 ## Uso
@@ -23,7 +25,7 @@ Acessar no browser (container rodando):
 
 exemplo: http://localhost:8080/?url=ProjetoBD/AlunosControllers/getAlunos
 
-**Obs: Seria necessária a conexão com o banco, que não foi disponibilizado o arquivo no git. Caso não tenha acesso ao servidor ftp para obter o arquivo da conexão, convém criar o banco com o script SQL disponível na [documentação](documentacao/) e adicionar o seguinte arquivo na pasta [controllers](controllers/):**
+**Obs: Seria necessária a conexão com o banco, que não foi disponibilizado o arquivo no git. Caso não tenha acesso ao servidor ftp para obter o arquivo da conexão, convém criar o banco com o script SQL disponível na pasta de [documentação](documentacao/) e adicionar o seguinte arquivo na pasta [controllers](controllers/):**
 
 **Config.php**:
 ```php

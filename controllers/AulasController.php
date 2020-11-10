@@ -11,7 +11,7 @@ class AulasController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getAulas(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM aula');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class AulasController {
 
     }
 
-    function insertAula($numero = '', $data = '', $duracao = '', $sincrona = '', $turma = '', $disciplina = '', $plataforma = ''){ 
+    function insert($numero = '', $data = '', $duracao = '', $sincrona = '', $turma = '', $disciplina = '', $plataforma = ''){ 
         if($numero == '' || $data == '' || $turma == '' || $disciplina == '' || $plataforma == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -56,7 +56,7 @@ class AulasController {
         }
     }
 
-    function deleteAula($numero = '', $turma = '', $disciplina = ''){ 
+    function delete($numero = '', $turma = '', $disciplina = ''){ 
         if($numero == '' || $turma == '' || $disciplina == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

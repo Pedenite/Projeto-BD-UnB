@@ -11,7 +11,7 @@ class DisciplinasController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getDisciplinas(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM disciplina');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class DisciplinasController {
 
     }
 
-    function insertDisciplina($codigo = '', $nome = ''){ 
+    function insert($codigo = '', $nome = ''){ 
         if($codigo == '' || $nome == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class DisciplinasController {
         }
     }
 
-    function deleteDisciplina($codigo = ''){ 
+    function delete($codigo = ''){ 
         if($codigo == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

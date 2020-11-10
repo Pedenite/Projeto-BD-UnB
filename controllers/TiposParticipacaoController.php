@@ -11,7 +11,7 @@ class TiposParticipacaoController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getTiposParticipacao(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM tipo_participacao');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class TiposParticipacaoController {
 
     }
 
-    function insertTipoParticipacao($tipo = '', $pontuacao = '', $porTempo = ''){ 
+    function insert($tipo = '', $pontuacao = '', $porTempo = ''){ 
         if($tipo == '' || $pontuacao == '' || $porTempo == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class TiposParticipacaoController {
         }
     }
 
-    function deleteTipoParticipacao($id = ''){ 
+    function delete($id = ''){ 
         if($id == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

@@ -11,7 +11,7 @@ class DepartamentosController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getDepartamentos(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM departamento');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class DepartamentosController {
 
     }
 
-    function insertDepartamento($codigo = '', $nome = ''){ 
+    function insert($codigo = '', $nome = ''){ 
         if($codigo == '' || $nome == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class DepartamentosController {
         }
     }
 
-    function deleteDepartamento($codigo = ''){ 
+    function delete($codigo = ''){ 
         if($codigo == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

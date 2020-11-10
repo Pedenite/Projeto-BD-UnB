@@ -11,7 +11,7 @@ class AlunosController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getAlunos(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM aluno');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class AlunosController {
 
     }
 
-    function insertAluno($matricula = '', $nome = '', $email = ''){ 
+    function insert($matricula = '', $nome = '', $email = ''){ 
         if($matricula == ''|| $nome == ''|| $email == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class AlunosController {
         }
     }
 
-    function deleteAluno($matricula = ''){ 
+    function delete($matricula = ''){ 
         if($matricula == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

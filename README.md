@@ -17,13 +17,13 @@ Foi usada a linguagem php para o desenvolvimento de uma API que servirá como o 
 Acessar no browser:
 `https://api2.opessoa.com.br/<Modulo>/<Classe>/<funcao>/<parm1>/<parm2>/<parm3>...`
 
-exemplo: https://api2.opessoa.com.br/ProjetoBD/AlunosController/getAlunos
+exemplo: https://api2.opessoa.com.br/ProjetoBD/AlunosController/get
 
 ### Ambiente de Teste Local (Docker)
 Acessar no browser (container rodando):
 `localhost:8080/?url=ProjetoBD/<nome do controller>/<funcao>/<param1>/<param2>/<param3>...`
 
-exemplo: http://localhost:8080/?url=ProjetoBD/AlunosController/getAlunos
+exemplo: http://localhost:8080/?url=ProjetoBD/AlunosController/get
 
 **Obs: Seria necessária a conexão com o banco, que não foi disponibilizado o arquivo no git. Caso não tenha acesso ao servidor ftp para obter o arquivo da conexão, convém criar o banco com o script SQL disponível na pasta [sql](sql/) e adicionar o seguinte arquivo na pasta [controllers](controllers/):**
 

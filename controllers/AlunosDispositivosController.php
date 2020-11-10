@@ -11,7 +11,7 @@ class AlunosDispositivosController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getAlunosDispositivos(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM aluno_dispositivo');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class AlunosDispositivosController {
 
     }
 
-    function insertAlunoDispositivo($aluno = '', $dispositivo = '', $disponibilidade = ''){ 
+    function insert($aluno = '', $dispositivo = '', $disponibilidade = ''){ 
         if($aluno == '' || $dispositivo == '' || $disponibilidade == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class AlunosDispositivosController {
         }
     }
 
-    function deleteAlunoDispositivo($aluno = '', $dispositivo = ''){ 
+    function delete($aluno = '', $dispositivo = ''){ 
         if($aluno == '' || $dispositivo == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

@@ -11,7 +11,7 @@ class ProfessoresTurmasController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getProfessoresTurmas(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM professor_turma');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class ProfessoresTurmasController {
 
     }
 
-    function insertProfessorTurma($professor = '', $turma = '', $disciplina = '', $substituto = ''){ 
+    function insert($professor = '', $turma = '', $disciplina = '', $substituto = ''){ 
         if($professor == '' || $turma == '' || $disciplina == '' || $substituto == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class ProfessoresTurmasController {
         }
     }
 
-    function deleteProfessorTurma($professor = '', $turma = '', $disciplina = ''){ 
+    function delete($professor = '', $turma = '', $disciplina = ''){ 
         if($professor == '' || $turma == '' || $disciplina == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

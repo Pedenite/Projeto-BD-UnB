@@ -11,7 +11,7 @@ class RecursosController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getRecursos(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM recurso');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class RecursosController {
 
     }
 
-    function insertRecurso($recurso = '', $plataforma = ''){ 
+    function insert($recurso = '', $plataforma = ''){ 
         if($recurso == '' || $plataforma == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class RecursosController {
         }
     }
 
-    function deleteRecurso($recurso = '', $plataforma = ''){ 
+    function delete($recurso = '', $plataforma = ''){ 
         if($recurso == '' || $plataforma == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

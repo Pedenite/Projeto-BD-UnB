@@ -11,7 +11,7 @@ class ParticipacoesController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getParticipacoes(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM participacao');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class ParticipacoesController {
 
     }
 
-    function insertParticipacao($tempo = '', $aluno = '', $tipo = '', $aula = '', $turma = '', $disciplina = ''){ 
+    function insert($tempo = '', $aluno = '', $tipo = '', $aula = '', $turma = '', $disciplina = ''){ 
         if($aluno == '' || $tipo == '' || $aula == '' || $turma == '' || $disciplina == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -56,7 +56,7 @@ class ParticipacoesController {
         }
     }
 
-    function deleteParticipacao($id = ''){ 
+    function delete($id = ''){ 
         if($id == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

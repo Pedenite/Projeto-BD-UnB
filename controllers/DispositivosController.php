@@ -11,7 +11,7 @@ class DispositivosController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getDispositivos(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM dispositivo');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class DispositivosController {
 
     }
 
-    function insertDispositivo($nome = ''){ 
+    function insert($nome = ''){ 
         if($nome == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class DispositivosController {
         }
     }
 
-    function deleteDispositivo($id = ''){ 
+    function delete($id = ''){ 
         if($id == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

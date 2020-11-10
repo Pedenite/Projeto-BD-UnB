@@ -11,7 +11,7 @@ class TurmasController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function getTurmas(){
+    function get(){
         $retorno = $this->conn->query('SELECT * FROM turma');
 
         if($retorno && $retorno->num_rows > 0){
@@ -40,7 +40,7 @@ class TurmasController {
 
     }
 
-    function insertTurmas($id = '', $horario = '', $diciplina = ''){ 
+    function insert($id = '', $horario = '', $diciplina = ''){ 
         if($id == '' || $horario == '' || $diciplina == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
@@ -55,7 +55,7 @@ class TurmasController {
         }
     }
 
-    function deleteTurmas($id = '', $diciplina = ''){ 
+    function delete($id = '', $diciplina = ''){ 
         if($id == '' || $diciplina == ''){
             $this->conn->close();
             return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));

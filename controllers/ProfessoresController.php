@@ -4,7 +4,7 @@ require_once('Config.php');
 
 require_once('Conn.php');
 
-class ProfessoresControllers {
+class ProfessoresController {
 
     function __construct(){
 

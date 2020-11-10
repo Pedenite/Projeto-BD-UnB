@@ -1,6 +1,7 @@
 <?php
 
 require_once('controllers/AlunosController.php');
+require_once('controllers/AlunosDispositivosController.php');
 require_once('controllers/AulasController.php');
 require_once('controllers/DepartamentosController.php');
 require_once('controllers/DisciplinasController.php');

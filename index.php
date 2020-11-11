@@ -4,6 +4,18 @@ function Api(){
 
     if(isset($_GET['url'])){
         $url = explode('/',$_GET['url']);
+        if($url[0] == 'pages'){
+            header_remove();
+            header("Content-Type: text/html; charset=utf-8");
+            switch($url[1]){
+                case 'relatorios':
+                    require_once('pages/relatorios.php');
+                    break;
+                default:
+                    header("HTTP/1.0 404 Not Found");
+            }
+            return null;
+        }
         $url[0] = ucfirst($url[0]);
         $modulo = $url[0];
         $classe = $url[1];

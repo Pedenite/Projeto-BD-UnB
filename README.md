@@ -15,13 +15,13 @@ Foi usada a linguagem php para o desenvolvimento de uma API que servirá como o 
 ## Uso
 ### API Web
 Acessar no browser:
-`https://api2.opessoa.com.br/<Modulo>/<Classe>/<funcao>/<parm1>/<parm2>/<parm3>...`
+`https://api2.opessoa.com.br/ProjetoBD/<Classe>/<funcao>/<parm1>/<parm2>/<parm3>...`
 
 exemplo: https://api2.opessoa.com.br/ProjetoBD/AlunosController/get
 
 ### Ambiente de Teste Local (Docker)
 Acessar no browser (container rodando):
-`localhost:8080/?url=ProjetoBD/<nome do controller>/<funcao>/<param1>/<param2>/<param3>...`
+`localhost:8080/?url=ProjetoBD/<Classe>/<funcao>/<param1>/<param2>/<param3>...`
 
 exemplo: http://localhost:8080/?url=ProjetoBD/AlunosController/get
 

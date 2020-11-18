@@ -40,3 +40,12 @@ define('DB', 'opesso08_ProjetoDB'); // ou o nome alternativo dado ao banco
 Para rodar o container, foi disponibilizado um arquivo execute.sh para já criar a imagem e rodar. Deve mudar o valor da variável LOCAL_PATH e opcionalmente de APP_PORT se for mudar a porta.
 
 Obs: é necessário ter o [docker](https://docs.docker.com/get-docker/) instalado para fazer esse teste local! 
+
+## Checklist
+- [] Atualizar Modelo ER.
+- [] Atualizar Modelo Relacional.
+- [] Cinco consultas em Álgebra relacional, onde cada consulta envolva pelo menos 3 tabelas.
+- [] Avaliação das formas normais em cinco tabelas.
+- [] Diagrama apresentando como a interface do programa acessa a camada de persistência.
+- [] Utilização de pelo menos uma View.
+- [] Utilização de pelo menos uma Procedure (com comandos condicionais).

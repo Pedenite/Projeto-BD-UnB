@@ -43,8 +43,7 @@ create table professor_turma (
 	e_substituto bit,
 	primary key (professor_matricula, turma_id, turma_disciplina_codigo),
 	foreign key (professor_matricula) references professor(matricula),
-	foreign key (turma_id) references turma(id),
-	foreign key (turma_disciplina_codigo) references disciplina(codigo)
+	foreign key (turma_id, turma_disciplina_codigo) references turma(id, disciplina_codigo)
 );
 
 create table plataforma (

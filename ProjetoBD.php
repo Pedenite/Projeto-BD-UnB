@@ -13,3 +13,4 @@ require_once('controllers/ProfessoresTurmasController.php');
 require_once('controllers/RecursosController.php');
 require_once('controllers/TiposParticipacaoController.php');
 require_once('controllers/TurmasController.php');
+require_once('controllers/ViewsController.php');

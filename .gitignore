@@ -2,6 +2,7 @@ controllers/Config.php
 connftp.txt
 
 *.log
+*.out
 *.aux
 *.fdb_latexmk
 *.fls

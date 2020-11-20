@@ -42,10 +42,13 @@ Para rodar o container, foi disponibilizado um arquivo execute.sh para já criar
 Obs: é necessário ter o [docker](https://docs.docker.com/get-docker/) instalado para fazer esse teste local! 
 
 ## Checklist
-- [ ] Atualizar Modelo ER.
-- [ ] Atualizar Modelo Relacional.
+- [x] Introdução
+- [x] Atualizar Modelo ER.
+- [x] Atualizar Modelo Relacional.
 - [ ] Cinco consultas em Álgebra relacional, onde cada consulta envolva pelo menos 3 tabelas.
 - [ ] Avaliação das formas normais em cinco tabelas.
+- [x] Script SQL que gerou o banco.
+- [x] Um programa com as funções de CRUD (Create Read Update Delete) para um conjunto de no mínimo 3 tabelas com relacionamento entre elas
 - [ ] Diagrama apresentando como a interface do programa acessa a camada de persistência.
-- [ ] Utilização de pelo menos uma View.
+- [x] Utilização de pelo menos uma View.
 - [ ] Utilização de pelo menos uma Procedure (com comandos condicionais).

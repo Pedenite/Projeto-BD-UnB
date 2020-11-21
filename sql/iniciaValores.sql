@@ -151,25 +151,25 @@ insert into aula (
 alter table tipo_participacao auto_increment = 1;
 insert into tipo_participacao (
 	tipo,
-    pontuacao,
-    pontuacao_por_tempo
+    pontuacao
 ) values
-('comentário', 1.0, 0), -- 1
-('envio de tarefa', 10.0, 0), -- 2
-('diálogo com professor', 2.5, 1), -- 3
-('presença em aula', 0.5, 1), -- 4
-('chamada', 0.1, 0); -- 5
+('extra', 2.0), -- 1
+('comentário', 1.0), -- 2
+('envio de tarefa', 10.0), -- 3
+('diálogo com professor', 2.5), -- 4
+('presença em aula', 0.5), -- 5
+('chamada', 0.1); -- 6
 
+alter table participacao auto_increment = 1;
 insert into participacao (
-	tempo,
     aluno_matricula,
     tipo_participacao_id,
     aula_numero,
     aula_turma_id,
     aula_turma_disciplina_codigo
 ) values
-(null, 180021231, 2, 2, 'A', 'CIC0124'),
-(null, 180021320, 2, 2, 'A', 'CIC0124'),
-(null, 180022059, 2, 2, 'A', 'CIC0124'),
-(null, 180026305, 2, 2, 'A', 'CIC0124'),
-(null, 180026488, 2, 2, 'A', 'CIC0124');
+(180021231, 2, 2, 'A', 'CIC0124'),
+(180021320, 2, 2, 'A', 'CIC0124'),
+(180022059, 2, 2, 'A', 'CIC0124'),
+(180026305, 2, 2, 'A', 'CIC0124'),
+(180026488, 2, 2, 'A', 'CIC0124');

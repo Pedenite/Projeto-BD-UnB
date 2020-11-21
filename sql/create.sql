@@ -1,9 +1,11 @@
-create database opesso08_projetoDB;
+drop database if exists opesso08_ProjetoDB;
+create database opesso08_ProjetoDB;
+use opesso08_ProjetoDB;
 
 create table aluno(
-	matricula nvarchar(9) not null,
-	nome nvarchar(50) null,
-	email nvarchar(50) null,
+	matricula varchar(9) not null,
+	nome varchar(50) null,
+	email varchar(50) null,
 	primary key (matricula)
 );
 
@@ -24,7 +26,7 @@ create table professor (
 
 create table disciplina (
 	codigo varchar(8) not null,
-	nome varchar(50) not null,
+	nome varchar(100) not null,
 	primary key(codigo)
 );
 
@@ -91,13 +93,12 @@ create table tipo_participacao (
 	id int(11) not null auto_increment,
 	tipo varchar(45) not null,
 	pontuacao float not null,
-	pontuacao_por_tempo bit not null,
 	primary key (id)
 );
 
 create table participacao (
 	id int(11) not null auto_increment,
-	tempo int(11) null, -- em minutos!
+	tempo int(11) not null default 1, -- em minutos!
 	aluno_matricula varchar(9) not null,
 	tipo_participacao_id int(11) not null,
 	aula_numero int(3) not null,

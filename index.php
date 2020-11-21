@@ -4,6 +4,9 @@ function Api(){
 
     if(isset($_GET['url'])){
         $url = explode('/',$_GET['url']);
+        foreach($url as $key => $value){
+            $url[$key] = trim($value);
+        }
         if($url[0] == 'pages'){
             header_remove();
             header("Content-Type: text/html; charset=utf-8");

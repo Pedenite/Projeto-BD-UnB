@@ -11,60 +11,20 @@ class ProceduresController {
         $this->conn = new Conn(HOST,USUARIO,SENHA,DB);
 
     }
-    function proc1(){
-        $retorno = $this->conn->query('EXEC proc1');
-
-        if($retorno && $retorno->num_rows > 0){
-
-            $arrayModelo = array();
-
-            for($i = 0; $i < $retorno->num_rows; $i++){
-
-                $arrayModelo[] = $retorno->fetch_object();
-
-            }
+    function pontosExtras($turma = '', $disciplina = ''){
+        if($turma == '' || $disciplina == ''){
             $this->conn->close();
-            return json_encode(array('status'=>'sucesso','dados'=>$arrayModelo));
-
-        }else{
-
-            if($retorno && $retorno->num_rows == 0){
-                $this->conn->close();
-                return json_encode(array('status'=>'sucesso','dados'=>array()));
-
-            }
-            $this->conn->close();
-            return json_encode(array('status'=>'erro','dados'=>'Nenhum modelo retornado!'));
-
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
         }
 
-    }
+        $retorno = $this->conn->query("CALL professorLegal('".$this->conn->real_escape_string($turma)."','".$this->conn->real_escape_string($disciplina)."')");
 
-    function proc2(){ 
-        $retorno = $this->conn->query('EXEC proc2');
-
-        if($retorno && $retorno->num_rows > 0){
-
-            $arrayModelo = array();
-
-            for($i = 0; $i < $retorno->num_rows; $i++){
-
-                $arrayModelo[] = $retorno->fetch_object();
-
-            }
+        if($retorno){
             $this->conn->close();
-            return json_encode(array('status'=>'sucesso','dados'=>$arrayModelo));
-
+            return json_encode(array('status'=>'sucesso','dados'=>'Pontos extras computados.'));
         }else{
-
-            if($retorno && $retorno->num_rows == 0){
-                $this->conn->close();
-                return json_encode(array('status'=>'sucesso','dados'=>array()));
-
-            }
             $this->conn->close();
-            return json_encode(array('status'=>'erro','dados'=>'Nenhum modelo retornado!'));
-
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao computar pontos extras!'));
         }
     }
 }

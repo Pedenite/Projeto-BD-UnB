@@ -103,7 +103,13 @@ Cinco consultas em Álgebra relacional, onde cada consulta envolva pelo menos 3 
 Avaliação das formas normais em cinco tabelas (\textbf{PEDRO PESSOA}).
 
 \section*{Camada de Persistência}
-Diagrama apresentando como a interface \sout{gráfica} do programa acessa a camada de persistência. (diagrama da camada de mapeamento para uma tabela do banco de dados) \textbf{PEDRO PESSOA VAI COMPLEMENTAR}.  e logo abaixo temos uma tabela de mapeamento de cada tabela do banco para a respectiva classe controladora.
+Abaixo temos um diagrama mostrando como a interface da API por meio da classe \texttt{mysqli} do php extendida por \texttt{Conn} no projeto acessa o banco de dados para realizar as operações do CRUD. Logo abaixo, temos uma tabela de mapeamento de cada tabela do banco para a respectiva classe controladora.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{diagrama_persistencia.png}
+    \caption{Diagrama de acesso a camada de persistência}
+\end{figure}
 
 \begin{center}
     \begin{tabular}{|p{.45\textwidth}|p{.45\textwidth}|}
@@ -140,13 +146,13 @@ Diagrama apresentando como a interface \sout{gráfica} do programa acessa a cama
 \end{center}
 
 \subsection*{Exemplos das Operações na tabela de Alunos}
-É importante mencionar que nem todos os atributos são obrigatórios durante a inserção e atualização de dados. Nesses casos, podem ser usadas duas barras seguidas para pular um parâmetro, ou se o parâmetro indesejado for o último, bastaria ignorar a sua existência por completo.
+É importante mencionar que nem todos os atributos são obrigatórios durante a inserção e atualização de dados. Nesses casos, podem ser usadas duas barras seguidas separadas por um espaço para pular um parâmetro (\texttt{/ /}), ou se o parâmetro indesejado for o último, bastaria ignorar a sua existência por completo.
 
 \begin{itemize}
     \label{operacoes}
     \item \texttt{SELECT} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/get}
     \item \texttt{INSERT} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/insert/200012345/José dos Testes/jt@tst.com}
-    \item \texttt{UPDATE} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/update/200012345//Joseph%20dos%20Testes}
+    \item \texttt{UPDATE} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/update/200012345/ /Joseph dos Testes}
     \item \texttt{DELETE} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/delete/200012345}
 \end{itemize}
 

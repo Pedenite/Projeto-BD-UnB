@@ -51,4 +51,4 @@ Obs: é necessário ter o [docker](https://docs.docker.com/get-docker/) instalad
 - [x] Um programa com as funções de CRUD (Create Read Update Delete) para um conjunto de no mínimo 3 tabelas com relacionamento entre elas
 - [ ] Diagrama apresentando como a interface do programa acessa a camada de persistência.
 - [x] Utilização de pelo menos uma View.
-- [ ] Utilização de pelo menos uma Procedure (com comandos condicionais).
+- [x] Utilização de pelo menos uma Procedure (com comandos condicionais).

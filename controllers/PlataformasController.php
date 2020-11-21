@@ -69,4 +69,28 @@ class PlataformasController {
             return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar a plataforma da tabela!'));
         }
     }
+
+    function update($pkid = '', $nome = ''){ 
+        if($pkid == '' || $nome == ''){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
+        }
+        
+        $linhas = $this->conn->query("SELECT * FROM `plataforma` WHERE id = '".$this->conn->real_escape_string($pkid)."'");
+        if($linhas->num_rows == 0){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Nenhum registro retornado pela chave.'));
+        }
+
+        $nome = $nome != "" ? "nome = '{$this->conn->real_escape_string($nome)}'" : "";
+
+        $retorno = $this->conn->query("UPDATE `plataforma` SET {$nome} WHERE id = '".$this->conn->real_escape_string($pkid)."'");
+        if($retorno){
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>'Registro atualizado na tabela.'));
+        }else{
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao atualizar o registro na tabela!'));
+        }
+    }
 }

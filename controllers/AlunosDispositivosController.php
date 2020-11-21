@@ -69,4 +69,37 @@ class AlunosDispositivosController {
             return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar a relação de aluno com dispositivo da tabela!'));
         }
     }
+    
+    function update($pkaluno = '', $pkdispositivo = '', $aluno = '', $dispositivo = '', $disponibilidade = ''){ 
+        if($pkaluno == '' || $pkdispositivo == '' || $aluno == '' && $dispositivo == '' && $disponibilidade == ''){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
+        }
+        
+        $linhas = $this->conn->query("SELECT * FROM aluno_dispositivo WHERE aluno_matricula = '".$this->conn->real_escape_string($pkaluno)."' AND dispositivo_id = '".$this->conn->real_escape_string($pkdispositivo)."'");
+        if($linhas->num_rows == 0){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Nenhum registro retornado pela chave.'));
+        }
+
+        $virgula = '';
+        if($aluno != ''){
+            $aluno = "aluno_matricula = '{$this->conn->real_escape_string($aluno)}'";
+            $virgula = ',';
+        }
+        if($dispositivo != ''){
+            $dispositivo = "{$virgula} dispositivo_id = '{$this->conn->real_escape_string($dispositivo)}'";
+            $virgula = ',';
+        }
+        $disponibilidade = $disponibilidade != "" ? "{$virgula} disponibilidade = '{$this->conn->real_escape_string($disponibilidade)}'" : "";
+
+        $retorno = $this->conn->query("UPDATE `aluno_dispositivo` SET {$aluno} {$dispositivo} {$disponibilidade} WHERE aluno_matricula = '".$this->conn->real_escape_string($pkaluno)."' AND dispositivo_id = '".$this->conn->real_escape_string($pkdispositivo)."'");
+        if($retorno){
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>'Registro atualizado na tabela.'));
+        }else{
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao atualizar o registro na tabela!'));
+        }
+    }
 }

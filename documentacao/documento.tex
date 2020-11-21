@@ -57,9 +57,9 @@ Para o projeto final da disciplina de Banco de Dados, foi desenvolvido um \texti
 \section*{Detalhes Técnicos}
 Foram usadas a linguagem de programação PHP e um banco de dados com o SGBD MySQL para o desenvolvimento do sistema. Para a implementação da interface de usuário, foi desenvolvida uma API que serve como o CRUD do projeto, responsável por acessar cada tabela do banco para as operações de inserção, atualização, remoção e consulta. Já no banco, foram criadas 10 entidades, que totalizaram 13 tabelas seguindo o modelo proposto para aulas remotas, como informações do aluno, professor, participação das aulas, plataformas em que as aulas são dadas, entre outros.
 
-O CRUD do projeto está funcionando em um servidor web e pode ser acessado pelo link \url{https://api2.opessoa.com.br/ProjetoBD}, assim como o banco também está no mesmo domínio. Após acessar o link, uma resposta no formato JSON deve ser recebida informando um erro, pois não foi informada uma classe. Existe uma classe para cada tabela, chamadas de \textit{controllers}, que efetuam as operações de manipulação e consulta dos dados da tabela conforme solicitado pelo usuário. Como exemplo, se quisermos acessar o \textit{controller} dos alunos, podemos chamar o \texttt{AlunosController} e, em seguida, a função que queremos utilizar dele, que são as mesmas para cada um: \texttt{get}, \texttt{insert}, \texttt{delete}. Então se queremos listar os alunos, podemos acessar: \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/get}.
+O CRUD do projeto está funcionando em um servidor web e pode ser acessado pelo link \url{https://api2.opessoa.com.br/ProjetoBD}, assim como o banco também está no mesmo domínio. Após acessar o link, uma resposta no formato JSON deve ser recebida informando um erro, pois não foi informada uma classe. Existe uma classe para cada tabela, chamadas de \textit{controllers}, que efetuam as operações de manipulação e consulta dos dados da tabela conforme solicitado pelo usuário. Como exemplo, se quisermos acessar o \textit{controller} dos alunos, podemos chamar o \texttt{AlunosController} e, em seguida, a função que queremos utilizar dele, que são as mesmas para cada um: \texttt{get}, \texttt{insert}, \texttt{delete} e \texttt{update} (\pageref{operacoes}).
 
-O padrão de nomenclatura dos \textit{controllers} é o nome da tabela em plural seguido por "\textit{Controller}" e usando \textit{camel case} para tabelas de nome composto como as de relacionamento. Acima foi mostrado como utilizar o comando \texttt{SELECT}, porém os comandos \texttt{INSERT} e \texttt{DELETE} precisam de parâmetros adicionais, que são os valores de cada coluna a inserir e no caso de excluir, devem ser passadas todas as chaves primárias, tudo separado por \texttt{/} e na ordem vista durante o \texttt{SELECT}. Exemplos: \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/insert/200012345/José dos Testes/jt@tst.com} e \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/delete/200012345}.
+O padrão de nomenclatura dos \textit{controllers} é o nome da tabela em plural seguido por "\textit{Controller}" e usando \textit{camel case} para tabelas de nome composto como as de relacionamento. Acima foi mostrado como utilizar o comando \texttt{SELECT}, porém os comandos \texttt{INSERT}, \texttt{DELETE} e \texttt{UPDATE} precisam de parâmetros adicionais, que são os valores de cada coluna a inserir e no caso de excluir, devem ser passadas todas as chaves primárias, tudo separado por \texttt{/} e na ordem vista durante o \texttt{SELECT}. Já no update, são passadas todas as chaves assim como na remoção e, em seguida os parâmetros a serem alterados na ordem, assim como na inserção. Posteriormente serão mostrados exemplos de como efetuar cada operação (\pageref{operacoes}).
 
 \subsection*{Modelo Entidade Relacionamento}
 A seguir, podemos ver o MER do projeto, que retrata a ideia inicial do projeto, onde foram pensados e diagramados os relacionamentos, as entidades e os atributos e chaves primárias de cada. Aqui foi onde começou a estrutura do banco de dados desenvolvido.
@@ -138,6 +138,17 @@ Diagrama apresentando como a interface \sout{gráfica} do programa acessa a cama
         \hline
     \end{tabular}\label{mapeamento-controller}
 \end{center}
+
+\subsection*{Exemplos das Operações na tabela de Alunos}
+É importante mencionar que nem todos os atributos são obrigatórios durante a inserção e atualização de dados. Nesses casos, podem ser usadas duas barras seguidas para pular um parâmetro, ou se o parâmetro indesejado for o último, bastaria ignorar a sua existência por completo.
+
+\begin{itemize}
+    \label{operacoes}
+    \item \texttt{SELECT} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/get}
+    \item \texttt{INSERT} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/insert/200012345/José dos Testes/jt@tst.com}
+    \item \texttt{UPDATE} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/update/200012345//Joseph%20dos%20Testes}
+    \item \texttt{DELETE} - \url{https://api2.opessoa.com.br/ProjetoBD/AlunosController/delete/200012345}
+\end{itemize}
 
 \section*{Considerações}
 Para o projeto desenvolvido, todo o código-fonte pode ser encontrado no github: \url{https://github.com/Pedenite/Projeto-BD-UnB}. Os scripts PHP divididos entre a pasta raiz e a pasta \texttt{controllers}, assim como todos os scripts SQL utilizados podem ser encontrados na pasta \texttt{sql}. Adicionalmente, este documento, o MR e o MER podem ser encontrados na pasta \texttt{documentacao} e existe uma descrição do trabalho na raiz do projeto no github, assim como instruções para executar localmente.

@@ -70,4 +70,49 @@ class ParticipacoesController {
             return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar a participacao da tabela!'));
         }
     }
+
+    function update($pkid = '', $tempo = '', $aluno = '', $tipo = '', $aula = '', $turma = '', $disciplina = ''){ 
+        if($pkid == '' || $tempo == '' && $aluno == '' && $tipo == '' && $aula == '' && $turma == '' && $disciplina == ''){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
+        }
+        
+        $linhas = $this->conn->query("SELECT * FROM participacao WHERE id = '".$this->conn->real_escape_string($pkid)."'");
+        if($linhas->num_rows == 0){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Nenhum registro retornado pela chave.'));
+        }
+
+        $virgula = '';
+        if($tempo != ''){
+            $tempo = "{$virgula} tempo_id = '{$this->conn->real_escape_string($tempo)}'";
+            $virgula = ',';
+        }
+        if($aluno != ''){
+            $aluno = "{$virgula} aluno_matricula = '{$this->conn->real_escape_string($aluno)}'";
+            $virgula = ',';
+        }
+        if($tipo != ''){
+            $tipo = "{$virgula} tipo_participacao_id = '{$this->conn->real_escape_string($tipo)}'";
+            $virgula = ',';
+        }
+        if($aula != ''){
+            $aula = "{$virgula} aula_numero = '{$this->conn->real_escape_string($aula)}'";
+            $virgula = ',';
+        }
+        if($turma != ''){
+            $turma = "{$virgula} aula_turma_id = '{$this->conn->real_escape_string($turma)}'";
+            $virgula = ',';
+        }
+        $disciplina = $disciplina != "" ? "{$virgula} aula_turma_disciplina_codigo = '{$this->conn->real_escape_string($disciplina)}'" : "";
+
+        $retorno = $this->conn->query("UPDATE `participacao` SET {$tempo} {$aluno} {$tipo} {$aula} {$turma} {$disciplina} WHERE id = '".$this->conn->real_escape_string($pknumero)."'");
+        if($retorno){
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>'Registro atualizado na tabela.'));
+        }else{
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao atualizar o registro na tabela!'));
+        }
+    }
 }

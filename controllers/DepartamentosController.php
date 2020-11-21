@@ -69,4 +69,33 @@ class DepartamentosController {
             return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar o departamento da tabela!'));
         }
     }
+
+    function update($pkcodigo = '', $codigo = '', $nome = ''){ 
+        if($pkcodigo == '' || $codigo == '' && $nome == ''){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
+        }
+        
+        $linhas = $this->conn->query("SELECT * FROM `departamento` WHERE codigo = '".$this->conn->real_escape_string($pkcodigo)."'");
+        if($linhas->num_rows == 0){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Nenhum registro retornado pela chave.'));
+        }
+
+        $virgula = '';
+        if($codigo != ''){
+            $codigo = "codigo = '{$this->conn->real_escape_string($codigo)}'";
+            $virgula = ',';
+        }
+        $nome = $nome != "" ? "{$virgula} nome = '{$this->conn->real_escape_string($nome)}'" : "";
+
+        $retorno = $this->conn->query("UPDATE `departamento` SET {$codigo} {$nome} WHERE codigo = '".$this->conn->real_escape_string($pkcodigo)."'");
+        if($retorno){
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>'Registro atualizado na tabela.'));
+        }else{
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao atualizar o registro na tabela!'));
+        }
+    }
 }

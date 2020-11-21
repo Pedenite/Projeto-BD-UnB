@@ -69,4 +69,37 @@ class AlunosController {
             return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar o aluno da tabela!'));
         }
     }
+
+    function update($pkmatricula = '', $matricula = '', $nome = '', $email = ''){ 
+        if($pkmatricula == '' || $matricula == '' && $nome == '' && $email == ''){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
+        }
+        
+        $linhas = $this->conn->query("SELECT * FROM aluno WHERE matricula = '".$this->conn->real_escape_string($pkmatricula)."'");
+        if($linhas->num_rows == 0){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Nenhum registro retornado pela chave.'));
+        }
+
+        $virgula = '';
+        if($matricula != ''){
+            $matricula = "matricula = '{$this->conn->real_escape_string($matricula)}'";
+            $virgula = ',';
+        }
+        if($nome != ''){
+            $nome = "{$virgula} nome = '{$this->conn->real_escape_string($nome)}'";
+            $virgula = ',';
+        }
+        $email = $email != "" ? "{$virgula} email = '{$this->conn->real_escape_string($email)}'" : "";
+
+        $retorno = $this->conn->query("UPDATE `aluno` SET {$matricula} {$nome} {$email} WHERE matricula = '".$this->conn->real_escape_string($pkmatricula)."';");
+        if($retorno){
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>'Registro atualizado na tabela.'));
+        }else{
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao atualizar o registro na tabela!'));
+        }
+    }
 }

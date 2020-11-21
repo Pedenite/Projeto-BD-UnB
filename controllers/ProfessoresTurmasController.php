@@ -69,4 +69,41 @@ class ProfessoresTurmasController {
             return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar a relação do professor com a turma da tabela!'));
         }
     }
+
+    function update($pkprofessor = '', $pkturma = '', $pkdisciplina = '', $professor = '', $turma = '', $disciplina = '', $substituto = ''){ 
+        if($pkprofessor == '' || $pkturma == '' || $pkdisciplina == '' || $professor == '' && $turma == '' && $disciplina == '' && $substituto == ''){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
+        }
+        
+        $linhas = $this->conn->query("SELECT * FROM professor_turma WHERE professor_matricula = '".$this->conn->real_escape_string($pkprofessor)."' AND turma_id = '".$this->conn->real_escape_string($pkturma)."' AND turma_disciplina_codigo = '".$this->conn->real_escape_string($pkdisciplina)."'");
+        if($linhas->num_rows == 0){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Nenhum registro retornado pela chave.'));
+        }
+
+        $virgula = '';
+        if($professor != ''){
+            $professor = "professor_matricula = '{$this->conn->real_escape_string($professor)}'";
+            $virgula = ',';
+        }
+        if($turma != ''){
+            $turma = "{$virgula} turma_id = '{$this->conn->real_escape_string($turma)}'";
+            $virgula = ',';
+        }
+        if($disciplina != ''){
+            $disciplina = "{$virgula} turma_disciplina_codigo = '{$this->conn->real_escape_string($disciplina)}'";
+            $virgula = ',';
+        }
+        $substituto = $substituto != "" ? "{$virgula} e_substituto = '{$this->conn->real_escape_string($substituto)}'" : "";
+
+        $retorno = $this->conn->query("UPDATE `professor_turma` SET {$professor} {$turma} {$disciplina} {$substituto} WHERE professor_matricula = '".$this->conn->real_escape_string($pkprofessor)."' AND turma_id = '".$this->conn->real_escape_string($pkturma)."' AND turma_disciplina_codigo = '".$this->conn->real_escape_string($pkdisciplina)."'");
+        if($retorno){
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>'Registro atualizado na tabela.'));
+        }else{
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao atualizar o registro na tabela!'));
+        }
+    }
 }

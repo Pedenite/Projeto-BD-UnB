@@ -69,4 +69,37 @@ class TiposParticipacaoController {
             return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar o tipo de participacao da tabela!'));
         }
     }
+
+    function update($pkid = '', $tipo = '', $pontuacao = '', $porTempo = ''){ 
+        if($pkid == '' || $tipo == '' && $pontuacao == '' && $porTempo == ''){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
+        }
+        
+        $linhas = $this->conn->query("SELECT * FROM `tipo_participacao` WHERE id = '".$this->conn->real_escape_string($pkid)."'");
+        if($linhas->num_rows == 0){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Nenhum registro retornado pela chave.'));
+        }
+
+        $virgula = '';
+        if($tipo != ''){
+            $tipo = "tipo = '{$this->conn->real_escape_string($tipo)}'";
+            $virgula = ',';
+        }
+        if($pontuacao != ''){
+            $pontuacao = "pontuacao = '{$virgula} {$this->conn->real_escape_string($pontuacao)}'";
+            $virgula = ',';
+        }
+        $porTempo = $porTempo != "" ? "{$virgula} pontuacao_por_tempo = '{$this->conn->real_escape_string($porTempo)}'" : "";
+
+        $retorno = $this->conn->query("UPDATE `tipo_participacao` SET {$tipo} {$pontuacao} {$porTempo} WHERE id = '".$this->conn->real_escape_string($pkid)."'");
+        if($retorno){
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>'Registro atualizado na tabela.'));
+        }else{
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao atualizar o registro na tabela!'));
+        }
+    }
 }

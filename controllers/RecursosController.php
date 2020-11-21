@@ -69,4 +69,33 @@ class RecursosController {
             return json_encode(array('status'=>'erro','dados'=>'Erro ao deletar o recurso da tabela!'));
         }
     }
+
+    function update($pkrecurso = '', $pkplataforma = '', $recurso = '', $plataforma = ''){ 
+        if($pkrecurso == '' || $pkplataforma == '' || $recurso == '' && $plataforma == ''){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Parametros insuficientes!'));
+        }
+        
+        $linhas = $this->conn->query("SELECT * FROM `recurso` WHERE recurso = '".$this->conn->real_escape_string($pkrecurso)."' AND plataforma_id = '".$this->conn->real_escape_string($pkplataforma)."'");
+        if($linhas->num_rows == 0){
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Nenhum registro retornado pela chave.'));
+        }
+
+        $virgula = '';
+        if($recurso != ''){
+            $recurso = "recurso = '{$this->conn->real_escape_string($recurso)}'";
+            $virgula = ',';
+        }
+        $plataforma = $plataforma != "" ? "{$virgula} plataforma = '{$this->conn->real_escape_string($plataforma)}'" : "";
+
+        $retorno = $this->conn->query("UPDATE `recurso` SET {$recurso} {$plataforma} WHERE recurso = '".$this->conn->real_escape_string($pkrecurso)."' AND plataforma_id = '".$this->conn->real_escape_string($pkplataforma)."'");
+        if($retorno){
+            $this->conn->close();
+            return json_encode(array('status'=>'sucesso','dados'=>'Registro atualizado na tabela.'));
+        }else{
+            $this->conn->close();
+            return json_encode(array('status'=>'erro','dados'=>'Erro ao atualizar o registro na tabela!'));
+        }
+    }
 }

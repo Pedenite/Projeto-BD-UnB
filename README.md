@@ -49,6 +49,6 @@ Obs: é necessário ter o [docker](https://docs.docker.com/get-docker/) instalad
 - [ ] Avaliação das formas normais em cinco tabelas.
 - [x] Script SQL que gerou o banco.
 - [x] Um programa com as funções de CRUD (Create Read Update Delete) para um conjunto de no mínimo 3 tabelas com relacionamento entre elas
-- [ ] Diagrama apresentando como a interface do programa acessa a camada de persistência.
+- [x] Diagrama apresentando como a interface do programa acessa a camada de persistência.
 - [x] Utilização de pelo menos uma View.
 - [x] Utilização de pelo menos uma Procedure (com comandos condicionais).

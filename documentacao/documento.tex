@@ -128,10 +128,7 @@ Abaixo podemos ver o MR do projeto, onde foram especificados detalhes mais inter
 \noindent \textbf{Disciplinas que não tiveram aulas.}
 
 \begin{equation}
-\begin{split}
-    SemAula \leftarrow \pi_{turma\_id, turma\_disciplina\_codigo}(\sigma_{group\ by\ turma\_id\ having\ COUNT(*) = 0}(aula)) \\
-    \sigma_{disciplina.codigo = SemAula.turma\_disciplina\_codigo}(SemAula)
-\end{split}
+    \sigma_{disciplina.codigo\ not\ in\ aula.turma\_disciplina\_codigo}(disciplina \bowtie aula)
 \end{equation}
 
 \section*{Forma Normal}

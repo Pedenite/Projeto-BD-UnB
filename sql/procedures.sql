@@ -1,3 +1,5 @@
+use opesso08_ProjetoDB;
+
 DROP PROCEDURE IF EXISTS professorLegal;
 DELIMITER //
 

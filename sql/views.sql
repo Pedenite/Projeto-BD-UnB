@@ -11,7 +11,11 @@ inner join disciplina d on p.aula_turma_disciplina_codigo = d.codigo
 order by al.nome;
 
 create view pessoas as
-select 'aluno', nome, email from aluno
+select 'aluno' as cadastro, nome, email from aluno
 union all
 select 'professor', nome, email from professor
 order by nome;
+
+create view disciplinas_sem_aulas as
+select * from disciplina where codigo not in 
+(select turma_disciplina_codigo from aula);

@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{lipsum}
+\usepackage{amsmath}
 \usepackage[normalem]{ulem}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -97,10 +98,46 @@ Abaixo podemos ver o MR do projeto, onde foram especificados detalhes mais inter
 \end{figure}
 
 \section*{Álgebra Relacional}
-Cinco consultas em Álgebra relacional, onde cada consulta envolva pelo menos 3 tabelas. (\textbf{PEDRO AGNES})
+\textbf{Todas as combinações possíveis de alunos, dispositivos, e participação.}
+
+\begin{equation}
+    dispositivo \times aluno \times participacao
+\end{equation}
+
+\noindent \textbf{Todas as pessoas cadastradas (alunos e professores) mais o departamento do professor e dispositivo do aluno.}
+
+\begin{equation}
+\begin{split}
+    \sigma_{aluno.matricula = aluno\_dispositivo.aluno\_matricula\ AND\ dispositivo.id = aluno\_dispositivo.dispositivo\_id} \\
+    (aluno \times aluno\_dispositivo \times dispositivo) \cup (professor \bowtie departamento)
+\end{split}
+\end{equation}
+
+\noindent \textbf{Relação de professor com turma.}
+
+\begin{equation}
+    professor \bowtie professor\_turma \bowtie turma
+\end{equation}
+
+\noindent \textbf{Todas as possívei formas de passar aulas.}
+
+\begin{equation}
+    tipo\_participacao \times plataforma \times recurso
+\end{equation}
+
+\noindent \textbf{Disciplinas que não tiveram aulas.}
+
+\begin{equation}
+\begin{split}
+    SemAula \leftarrow \pi_{turma\_id, turma\_disciplina\_codigo}(\sigma_{group\ by\ turma\_id\ having\ COUNT(*) = 0}(aula)) \\
+    \sigma_{disciplina.codigo = SemAula.turma\_disciplina\_codigo}(SemAula)
+\end{split}
+\end{equation}
 
 \section*{Forma Normal}
 Avaliação das formas normais em cinco tabelas (\textbf{PEDRO PESSOA}).
+
+\newpage
 
 \section*{Camada de Persistência}
 Abaixo temos um diagrama mostrando como a interface da API por meio da classe \texttt{mysqli} do php extendida por \texttt{Conn} no projeto acessa o banco de dados para realizar as operações do CRUD. Logo abaixo, temos uma tabela de mapeamento de cada tabela do banco para a respectiva classe controladora.
@@ -157,7 +194,7 @@ Abaixo temos um diagrama mostrando como a interface da API por meio da classe \t
 \end{itemize}
 
 \section*{Considerações}
-Para o projeto desenvolvido, todo o código-fonte pode ser encontrado no github: \url{https://github.com/Pedenite/Projeto-BD-UnB}. Os scripts PHP divididos entre a pasta raiz e a pasta \texttt{controllers}, assim como todos os scripts SQL utilizados podem ser encontrados na pasta \texttt{sql}. Adicionalmente, este documento, o MR e o MER podem ser encontrados na pasta \texttt{documentacao} e existe uma descrição do trabalho na raiz do projeto no github, assim como instruções para executar localmente.
+Para o projeto desenvolvido, todo o código-fonte pode ser encontrado no github: \url{https://github.com/Pedenite/Projeto-BD-UnB}. Os scripts PHP estão divididos entre a pasta raiz e a pasta \texttt{controllers}, assim como todos os scripts SQL utilizados podem ser encontrados na pasta \texttt{sql}. Adicionalmente, este documento, o MR e o MER podem ser encontrados na pasta \texttt{documentacao} e existe uma descrição do trabalho na raiz do projeto no github, assim como instruções para executar localmente.
 
 Para a execução do projeto em uma máquina local, deverá ser configurado um servidor Apache para o php, por exemplo, ou utilizar os comandos docker disponibilizados para rodar um container já configurado (mais informações no git). De todo modo, como não é qualquer um que possui acesso ao banco deste projeto, deve ser criado um banco local com os scripts disponibilizados e adicionado o seguinte arquivo \texttt{Config.php} na pasta \texttt{controllers}:
 

@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 \usepackage{lipsum}
 \usepackage{amsmath}
+\usepackage{makecell}
 \usepackage[normalem]{ulem}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -132,7 +133,86 @@ Abaixo podemos ver o MR do projeto, onde foram especificados detalhes mais inter
 \end{equation}
 
 \section*{Forma Normal}
-Avaliação das formas normais em cinco tabelas (\textbf{PEDRO PESSOA}).
+Tabelas analisadas:
+
+\begin{itemize}
+    \setlength\itemsep{0.1em}
+    \item Professor
+    \item Departamento
+    \item Turma
+    \item Disciplina
+    \item Aula
+\end{itemize}
+
+\subsection*{Professor}
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    \makecell{Matrícula \\(PK)} & Nome & Email & \makecell{Departamento \\(FK)} \\
+    \hline
+\end{tabular}
+\\
+\\
+\textbf{1FN} - A tabela Professor está na primeira forma normal considerando que só é possível atribuir um único e-mail ao Professor, pertencer a um único departamento e nome é um atributo atômico. \\
+\\
+\textbf{2FN} - Todos os atributos são dependentes da Matricula e a tabela já está na 1ª Forma Normal. \\
+\\
+\textbf{3FN} - A tabela já esta na 1ª e na 2ª Forma Normal e todos os atributos não chave são independentes de outros atributos não chave, logo está na 3ª forma normal também.
+
+\subsection*{Departamento}
+\begin{tabular}{|c|c|}
+    \hline
+    \makecell{Código \\(PK)} & Nome \\
+    \hline
+\end{tabular}
+\\
+\\
+\textbf{1FN} - A tabela departamento está na primeira forma normal pois todos os atributos são atômicos. \\
+\\
+\textbf{2FN} - O atributo Nome é dependente do Código do departamento que é a chave primaria e a tabela está na 1ª Forma Normal. \\
+\\
+\textbf{3FN} - A tabela já esta na 1ª e na 2ª Forma Normal e tem apenas nome como atributo não chave, logo ele não depende de outro não chave e a tabela está na 3ª forma normal também.
+
+\subsection*{Disciplina}
+\begin{tabular}{|c|c|}
+    \hline
+    \makecell{Código \\(PK)} & Nome \\
+    \hline
+\end{tabular}
+\\
+\\
+\textbf{1FN} - A tabela Disciplina está na primeira forma normal pois todos os atributos são atômicos. \\
+\\
+\textbf{2FN} - O atributo Nome é dependente do Código da Disciplina que é a chave primaria e a tabela está na 1ª Forma Normal. \\
+\\
+\textbf{3FN} - A tabela já esta na 1ª e na 2ª Forma Normal e tem apenas nome como atributo não chave, logo ele não depende de outro não chave e a tabela está na 3ª forma normal também.
+
+\subsection*{Turma}
+\begin{tabular}{|c|c|c|}
+    \hline
+    \makecell{ID \\(PK)} & Horário & \makecell{Disciplina \\(PK|FK)} \\
+    \hline
+\end{tabular}
+\\
+\\
+\textbf{1FN} - A tabela está na primeira forma normal pois todos os atributos são atômicos. \\
+\\
+\textbf{2FN} - A tabela está na 1ª Forma Normal e todos os atributos são dependentes da PK. \\
+\\
+\textbf{3FN} - A tabela está na 1ª e 2ª Forma Normal e nenhum atribuo não chave é dependente de outro não chave, logo está na 3ª Forma Normal.
+
+\subsection*{Aula}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    \makecell{Número \\(PK)} & \makecell{Turma \\(PK|FK)} & \makecell{Disciplina \\(PK|FK)} & \makecell{Plataforma \\(FK)} & Data & Duração & É síncrona \\
+    \hline
+\end{tabular}
+\\
+\\
+\textbf{1FN} - A tabela está na 1ª Forma Normal pois todos os atributos são atômicos. \\
+\\
+\textbf{2FN} - A tabela está na 2ª Forma Normal pois todos os atributos não chave são dependentes das chaves primarias e está na 1ª Forma Normal. \\
+\\
+\textbf{3FN} - A tabela está na 3ª Forma Normal pois todos os atributos não chaves são independentes de outros atributos não chave e está na 1ª e 2ª Forma Normal.
 
 \newpage
 
